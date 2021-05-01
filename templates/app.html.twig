@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+    <div class="todo-container">
+        <div class="todo-container__input">
+            <input type="text" placeholder="Название задачи...">
+            <button class="input-button">
+                <i class="fas fa-plus"></i>
+                Добавить
+            </button>
+        </div>
+        <button class="todo-container__sort-button">
+            <a href="#">Отсортировать по рейтингу</a>
+        </button>
+        <ul>
+            <li class="todo-item">
+                <input class="todo-item__sort" type="number" value="1">
+                <section class="todo-item__label">
+                    <p>Выполнить тестовое задание</p>
+                </section>
+                <button class="todo-item__complete-button">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="todo-item__delete-button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </li>
+            <li class="todo-item">
+                <input class="todo-item__sort" type="number" value="1">
+                <section class="todo-item__label">
+                    <p>Выполнить тестовое задание</p>
+                </section>
+                <button class="todo-item__complete-button">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="todo-item__delete-button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </li>
+            <li class="todo-item">
+                <input class="todo-item__sort" type="number" value="1">
+                <section class="todo-item__label">
+                    <p>Выполнить тестовое задание</p>
+                </section>
+                <button class="todo-item__complete-button">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="todo-item__delete-button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </li>
+            <li class="todo-item">
+                <input class="todo-item__sort" type="number" value="1">
+                <section class="todo-item__label">
+                    <p>Выполнить тестовое задание</p>
+                </section>
+                <button class="todo-item__complete-button">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="todo-item__delete-button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </li>
+            <li class="todo-item">
+                <input class="todo-item__sort" type="number" value="1">
+                <section class="todo-item__label">
+                    <p>Выполнить тестовое задание</p>
+                </section>
+                <button class="todo-item__complete-button">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="todo-item__delete-button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </li>
+            <li class="todo-item">
+                <input class="todo-item__sort" type="number" value="1">
+                <section class="todo-item__label">
+                    <p>Выполнить тестовое задание</p>
+                </section>
+                <button class="todo-item__complete-button">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="todo-item__delete-button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </li>
+        </ul>
+        <button class="todo-container__show-more">
+            <a href="#">Показать ещё</a>
+        </button>
+    </div>
+{% endblock %}

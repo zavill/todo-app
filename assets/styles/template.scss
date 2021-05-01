@@ -1,0 +1,44 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  text-decoration: none;
+  color: white;
+  font-family: 'Lato', sans-serif;
+  /*transition: 150ms ease-in-out,  transform 150ms ease;*/
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: unset;
+}
+
+body {
+  background-color: #0984e3;
+}
+
+#__main {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  width: 100%;
+  transition: box-shadow .5s, border-color .25s ease-in-out;
+  border-radius: 0;
+  border: 1px solid #b2bec3;
+  height: 25px;
+  padding: 5px;
+}
+
+button {
+  border-radius: 0;
+  text-align: center;
+  padding: 3px;
+  height: 37px;
+  border: 0;
+  color: white;
+}
+
+ul {
+  list-style: none;
+}
