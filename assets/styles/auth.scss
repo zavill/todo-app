@@ -1,0 +1,39 @@
+$button-color: #ff005b;
+$button-hover-color: #c9004c;
+
+body {
+  background-color: #011627 !important;
+}
+
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+
+  &__header {
+    margin-right: 50px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+
+    input {
+      margin-bottom: 25px;
+      width: auto !important;
+    }
+  }
+}
+
+.auth-button {
+  background-color: $button-color;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.auth-button:hover {
+  background-color: $button-hover-color;
+}

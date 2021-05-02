@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('auth') }}
+{% endblock %}
+
+{% block body %}
+    <div class="auth-wrapper">
+        <div class="auth-wrapper__header">
+            <h1>Xsolla</h1>
+            <h2>To-Do List</h2>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="auth-wrapper__form">
+            <input type="text" placeholder="Имя пользователя">
+            <input type="text" placeholder="Пароль">
+            <button class="auth-button"><a href="#">Войти</a></button>
+            <a href="#">У меня еще нет аккаунта</a>
+        </div>
+        <div class="auth-wrapper__form" style="display: none;">
+            <input type="text" placeholder="Имя пользователя">
+            <input type="text" placeholder="Пароль">
+            <input type="text" placeholder="Повторите пароль">
+            <button class="auth-button"><a href="#">Зарегистрироваться</a></button>
+            <a href="#">У меня уже есть аккаунта</a>
+        </div>
+    </div>
+{% endblock %}
