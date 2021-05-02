@@ -1,3 +1,6 @@
+$button-color: #ff005b;
+$button-hover-color: #c9004c;
+
 .todo-container {
   width: 100%;
   max-width: 50%;
@@ -9,6 +12,11 @@
   display: flex;
   flex-direction: column;
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__input {
     margin-bottom: 7px;
     width: 100%;
@@ -17,23 +25,32 @@
   }
 
   &__sort-button {
-    background-color: #00cec9;
+    background-color: #ff005b;
     padding: 5px;
     margin-bottom: 7px;
     width: 40%;
   }
+  &__sort-button:hover {
+    background-color: $button-hover-color;
+  }
 
   &__show-more {
-    background-color: #00cec9;
+    background-color: #ff005b;
     padding: 5px;
     align-self: center;
     width: 60%;
+  }
+  &__show-more:hover {
+    background-color: $button-hover-color;
   }
 }
 
 .input-button {
   width: 15%;
-  background-color: #00cec9;
+  background-color: #ff005b;
+}
+.input-button:hover {
+  background-color: $button-hover-color;
 }
 
 .todo-item {
@@ -61,8 +78,32 @@
     width: 5%;
   }
 
+  &__complete-button:hover {
+    background-color: #00876d;
+  }
+
   &__delete-button {
     background-color: #d63031;
     width: 5%;
+  }
+
+  &__delete-button:hover {
+    background-color: #9a2223;
+    width: 5%;
+  }
+}
+.header {
+  &__button {
+    background-color: #ff005b;
+    width: 5%;
+    margin-bottom: 7px;
+  }
+
+  &__button:hover {
+    background-color: $button-hover-color;
+  }
+
+  &__username {
+    color: black;
   }
 }

@@ -6,6 +6,13 @@
 
 {% block body %}
     <div class="todo-container">
+        <div class="todo-container__header">
+            <button class="header__button">
+                <i class="fas fa-archive"></i>
+                <i class="fas fa-list" style="display: none"></i>
+            </button>
+            <h3><a href="#" class="header__username">zavill</a></h3>
+        </div>
         <div class="todo-container__input">
             <input type="text" placeholder="Название задачи...">
             <button class="input-button">
@@ -14,7 +21,7 @@
             </button>
         </div>
         <button class="todo-container__sort-button">
-            <a href="#">Отсортировать по рейтингу</a>
+            <a href="#">Отсортировать по приоритету</a>
         </button>
         <ul>
             <li class="todo-item">
