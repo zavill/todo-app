@@ -47,7 +47,12 @@ class UserAPI extends AbstractApi
                 throw new ApiException('Неверное имя пользователя или пароль', Response::HTTP_NOT_FOUND);
             }
 
-            $token = new UsernamePasswordToken($arData['user'], $arData['user']->getPassword(), $_ENV['APP_ENV'], $arData['user']->getRoles());
+            $token = new UsernamePasswordToken(
+                $arData['user'],
+                $arData['user']->getPassword(),
+                $_ENV['APP_ENV'],
+                $arData['user']->getRoles()
+            );
             $this->get('security.token_storage')->setToken($token);
 
             return new JsonResponse(
