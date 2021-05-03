@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -33,6 +35,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ToDo::class, mappedBy="User")
+     */
+    private $toDoes;
+
+    public function __construct()
+    {
+        $this->toDoes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -108,5 +120,35 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|ToDo[]
+     */
+    public function getToDoes(): Collection
+    {
+        return $this->toDoes;
+    }
+
+    public function addToDo(ToDo $toDo): self
+    {
+        if (!$this->toDoes->contains($toDo)) {
+            $this->toDoes[] = $toDo;
+            $toDo->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeToDo(ToDo $toDo): self
+    {
+        if ($this->toDoes->removeElement($toDo)) {
+            // set the owning side to null (unless already changed)
+            if ($toDo->getUser() === $this) {
+                $toDo->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
