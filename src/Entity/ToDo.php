@@ -90,4 +90,14 @@ class ToDo
 
         return $this;
     }
+
+    public function serializeJSON() {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'sort' => $this->getSort(),
+            'isCompleted' => $this->getIsCompleted(),
+            'userId' => $this->getUser()->getId()
+        ];
+    }
 }
