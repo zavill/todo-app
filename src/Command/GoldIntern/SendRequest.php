@@ -6,8 +6,13 @@ namespace App\Command\GoldIntern;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Monolog\Logger;
 
+/**
+ * Команда для отправки запроса о действия с тудушкой на другой сервер
+ *
+ * Class SendRequest
+ * @package App\Command\GoldIntern
+ */
 class SendRequest
 {
     public static function run(int $userId, string $action): int
