@@ -152,6 +152,33 @@ class ToDoAPI extends AbstractApi
     }
 
     /**
+     * @Route("/{id}", methods={"DELETE"})
+     */
+    public function deleteToDo($id): JsonResponse
+    {
+        try {
+            $this->checkAuthorization();
+            $todo = $this->getToDo($id);
+
+            $this->entityManager->remove($todo);
+            $this->entityManager->flush();
+
+            return new JsonResponse(
+                [
+                    'data' => $id
+                ]
+            );
+        } catch (ApiException $exception) {
+            return new JsonResponse(
+                [
+                    'error' => $exception->getMessage()
+                ],
+                $exception->getCode()
+            );
+        }
+    }
+
+    /**
      * @Route("/", methods={"GET"})
      */
     public function getList(): JsonResponse
