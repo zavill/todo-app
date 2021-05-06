@@ -4,9 +4,11 @@
 namespace App\Controller\API;
 
 
+use App\Entity\GoldInRequest;
 use App\Entity\ToDo;
 use App\Exception\ApiException;
 use App\Repository\ToDoRepository;
+use App\Service\GoldIntern\SendRequest;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -92,6 +94,8 @@ class ToDoAPI extends AbstractApi
             $this->entityManager->persist($todo);
             $this->entityManager->flush();
 
+            $this->sendRequest('created');
+
             return new JsonResponse(
                 [
                     'data' => $todo->serializeJSON()
@@ -138,6 +142,8 @@ class ToDoAPI extends AbstractApi
             $this->entityManager->persist($todo);
             $this->entityManager->flush();
 
+            $this->sendRequest('updated');
+
             return new JsonResponse(
                 [
                     'data' => $todo->serializeJSON()
@@ -164,6 +170,8 @@ class ToDoAPI extends AbstractApi
 
             $this->entityManager->remove($todo);
             $this->entityManager->flush();
+
+            $this->sendRequest('deleted');
 
             return new JsonResponse(
                 [
@@ -268,5 +276,30 @@ class ToDoAPI extends AbstractApi
         }
 
         return $todo;
+    }
+
+    /**
+     * Отправка запросов на сервер GoldIntern
+     *
+     * @param string $action
+     * @throws ApiException
+     */
+    private function sendRequest(string $action)
+    {
+        $result = SendRequest::run($this->user->getId(), $action);
+
+        if ($result === 404 || $result === 503) {
+            $request = new GoldInRequest();
+            $request->setUserId($this->user->getId());
+            $request->setAction($action);
+
+            $this->entityManager->persist($request);
+            $this->entityManager->flush();
+
+            throw new ApiException(
+                    'Произошла ошибка подсистемы',
+                Response::HTTP_SERVICE_UNAVAILABLE
+            );
+        }
     }
 }
