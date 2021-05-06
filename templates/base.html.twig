@@ -12,12 +12,11 @@
 
         <script src="https://kit.fontawesome.com/3b2a310412.js" crossorigin="anonymous"></script>
         {{ encore_entry_script_tags('index') }}
-
-        {% block javascripts %}{% endblock %}
     </head>
     <body>
         <div id="__main">
             {% block body %}{% endblock %}
         </div>
+        {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -3,7 +3,9 @@
 {% block stylesheets %}
     {{ encore_entry_link_tags('auth') }}
 {% endblock %}
-
+{% block javascripts %}
+    {{ encore_entry_script_tags('auth') }}
+{% endblock %}
 {% block body %}
     <div class="auth-wrapper">
         <div class="auth-wrapper__header">
@@ -11,18 +13,22 @@
             <h2>To-Do List</h2>
         </div>
         <div class="vertical-line"></div>
-        <div class="auth-wrapper__form">
-            <input type="text" placeholder="Имя пользователя">
-            <input type="text" placeholder="Пароль">
-            <button class="auth-button"><a href="#">Войти</a></button>
-            <a href="#">У меня еще нет аккаунта</a>
+        <div class="auth-wrapper__form" id="auth-form">
+            <input type="text" placeholder="Имя пользователя" id="auth-login">
+            <input type="text" placeholder="Пароль" id="auth-pass">
+            <button class="auth-button" id="auth-button">
+                <a href="javascript:void(0);">Войти</a>
+            </button>
+            <a href="javascript:void(0);" id="btn-to-reg">У меня еще нет аккаунта</a>
         </div>
-        <div class="auth-wrapper__form" style="display: none;">
-            <input type="text" placeholder="Имя пользователя">
-            <input type="text" placeholder="Пароль">
-            <input type="text" placeholder="Повторите пароль">
-            <button class="auth-button"><a href="#">Зарегистрироваться</a></button>
-            <a href="#">У меня уже есть аккаунта</a>
+        <div class="auth-wrapper__form" style="display: none;" id="reg-form">
+            <input type="text" placeholder="Имя пользователя" id="reg-login">
+            <input type="text" placeholder="Пароль" id="reg-pass">
+            <input type="text" placeholder="Повторите пароль" id="reg-rePass">
+            <button class="auth-button" id="reg-button">
+                <a href="javascript:void(0);">Зарегистрироваться</a>
+            </button>
+            <a href="javascript:void(0);" id="btn-to-auth">У меня уже есть аккаунта</a>
         </div>
     </div>
 {% endblock %}
