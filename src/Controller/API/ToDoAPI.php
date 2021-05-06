@@ -8,7 +8,6 @@ use App\Entity\ToDo;
 use App\Exception\ApiException;
 use App\Repository\ToDoRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +36,10 @@ class ToDoAPI extends AbstractApi
     ) {
         parent::__construct($requestStack, $entityManager);
         $this->toDoRepository = $toDoRepository;
-        $this->user = $security->getUser();
+
+        if ($security->getUser()) {
+            $this->user = $security->getUser();
+        }
     }
 
     /**
@@ -184,6 +186,8 @@ class ToDoAPI extends AbstractApi
     public function getList(): JsonResponse
     {
         try {
+            $this->checkAuthorization();
+
             $sortField = $this->request->get('sortField');
             $sort = explode('|', $sortField);
             $orderBy = ($sortField ? [$sort[0] => $sort[1]] : []);
