@@ -43,8 +43,14 @@ class UserAPI extends AbstractApi
         try {
             $arData = $this->getAuthData();
 
-            if (!$arData['user'] || !$encoder->isPasswordValid($arData['user'], $arData['plainPass'])) {
-                throw new ApiException('Неверное имя пользователя или пароль', Response::HTTP_NOT_FOUND);
+            if (!$arData['user'] || !$encoder->isPasswordValid(
+                    $arData['user'],
+                    $arData['plainPass']
+                )) {
+                throw new ApiException(
+                    'Неверное имя пользователя или пароль',
+                    Response::HTTP_NOT_FOUND
+                );
             }
 
             $token = new UsernamePasswordToken(
@@ -83,7 +89,10 @@ class UserAPI extends AbstractApi
             $arData = $this->getAuthData();
 
             if ($arData['user']) {
-                throw new ApiException('Пользователь с таким именем уже существует', Response::HTTP_UNAUTHORIZED);
+                throw new ApiException(
+                    'Пользователь с таким именем уже существует',
+                    Response::HTTP_UNAUTHORIZED
+                );
             }
 
             $user = new User();
@@ -93,7 +102,10 @@ class UserAPI extends AbstractApi
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
-            $token = new UsernamePasswordToken($user, $user->getPassword(), $_ENV['APP_ENV'], $user->getRoles());
+            $token = new UsernamePasswordToken(
+                $user, $user->getPassword(), $_ENV['APP_ENV'],
+                $user->getRoles()
+            );
             $this->get('security.token_storage')->setToken($token);
 
             return new JsonResponse(
@@ -121,18 +133,31 @@ class UserAPI extends AbstractApi
     public function getAuthData(): array
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw new ApiException('Вы уже авторизованы', Response::HTTP_NOT_FOUND);
+            throw new ApiException(
+                'Вы уже авторизованы',
+                Response::HTTP_CONFLICT
+            );
         }
 
         if (!$arData['username'] = $this->request->get('username')) {
-            throw new ApiException('Не задано имя пользователя', Response::HTTP_UNPROCESSABLE_ENTITY);
+            throw new ApiException(
+                'Не задано имя пользователя',
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
         }
 
         if (!$arData['plainPass'] = $this->request->get('password')) {
-            throw new ApiException('Не задан пароль', Response::HTTP_UNPROCESSABLE_ENTITY);
+            throw new ApiException(
+                'Не задан пароль',
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
         }
 
-        $arData['user'] = $this->userRepository->findOneBy(['username' => $arData['username']]);
+        $arData['user'] = $this->userRepository->findOneBy(
+            [
+                'username' => $arData['username']
+            ]
+        );
 
         return $arData;
     }
