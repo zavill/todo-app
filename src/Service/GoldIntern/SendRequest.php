@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Command\GoldIntern;
+namespace App\Service\GoldIntern;
 
 
 use GuzzleHttp\Client;
@@ -11,7 +11,7 @@ use GuzzleHttp\Exception\GuzzleException;
  * Команда для отправки запроса о действия с тудушкой на другой сервер
  *
  * Class SendRequest
- * @package App\Command\GoldIntern
+ * @package App\Service\GoldIntern
  */
 class SendRequest
 {
@@ -20,6 +20,7 @@ class SendRequest
         $client = new Client(
             [
                 'timeout' => 5.0,
+                'connect_timeout' => 5.0,
             ]
         );
 
