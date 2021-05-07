@@ -200,16 +200,9 @@ class ToDoAPI extends AbstractApi
             $sort = explode('|', $sortField);
             $orderBy = ($sortField ? [$sort[0] => $sort[1]] : []);
 
-            $page = (int)$this->request->get('page') ?: 1;
-            $limit = $_ENV['LIMIT_PER_PAGE'];
-
-            $offset = ($page * $limit) - $limit;
-
             $rawResult = $this->toDoRepository->findBy(
                 ['User' => $this->user->getId()],
-                $orderBy,
-                $limit,
-                $offset
+                $orderBy
             );
 
             foreach ($rawResult as $toDo) {
