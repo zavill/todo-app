@@ -12,8 +12,6 @@ let regRePassInput;
 let regButton;
 let toAuthButton;
 $(function() {
-    console.log('ready');
-
     authForm = $('#auth-form');
     authLoginInput = $('#auth-login');
     authPassInput = $('#auth-pass');
