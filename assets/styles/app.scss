@@ -91,6 +91,13 @@ $button-hover-color: #c9004c;
     background-color: #9a2223;
     width: 5%;
   }
+
+  &__completed {
+    background-color: #00b894;
+    p {
+      color: white;
+    }
+  }
 }
 .header {
   &__button {
