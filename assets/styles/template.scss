@@ -52,3 +52,18 @@ ul {
   width: 1px;
   border-left: 1px solid #bdc3c7;
 }
+
+#nprogress {
+  .bar {
+    background: #ff005b !important;
+  }
+
+  .peg {
+    box-shadow: 0 0 10px #ff005b, 0 0 5px #ff005b !important;
+  }
+
+  .spinner-icon {
+    border-top-color: #ff005b !important;
+    border-left-color: #ff005b !important;
+  }
+}
