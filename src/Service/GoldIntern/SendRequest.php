@@ -19,8 +19,8 @@ class SendRequest
     {
         $client = new Client(
             [
-                'timeout' => 5.0,
-                'connect_timeout' => 5.0,
+                'timeout' => 2.0,
+                'connect_timeout' => 2.0,
             ]
         );
 
