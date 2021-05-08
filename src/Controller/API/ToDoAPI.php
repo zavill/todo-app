@@ -197,11 +197,20 @@ class ToDoAPI extends AbstractApi
             $this->checkAuthorization();
 
             $sortField = $this->request->get('sortField');
-            $sort = explode('|', $sortField);
-            $orderBy = ($sortField ? [$sort[0] => $sort[1]] : []);
+            $sortMethod = $this->request->get('sortMethod');
+            $orderBy = ($sortField ? [$sortField => $sortMethod] : []);
+
+            $filter = [
+                'User' => $this->user->getId()
+            ];
+
+            /* Если в запросе есть данные для фильтрации по статусу задачи */
+            if ($this->request->get('isCompleted') !== null) {
+                $filter['isCompleted'] = (bool)$this->request->get('isCompleted');
+            }
 
             $rawResult = $this->toDoRepository->findBy(
-                ['User' => $this->user->getId()],
+                $filter,
                 $orderBy
             );
 
