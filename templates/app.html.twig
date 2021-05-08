@@ -3,102 +3,58 @@
 {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
 {% endblock %}
-
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
 {% block body %}
     <div class="todo-container">
         <div class="todo-container__header">
-            <button class="header__button">
-                <i class="fas fa-archive"></i>
-                <i class="fas fa-list" style="display: none"></i>
+            <button class="header__button" id="archive-list-btn">
+                <i class="fas fa-archive" id="to-archive-icon"></i>
+                <i class="fas fa-list" style="display: none" id="to-list-icon"></i>
             </button>
-            <h3><a href="#" class="header__username">zavill</a></h3>
+            <h3><a href="{{ url('app_logout') }}" class="header__username">{{ app.user.username }}</a></h3>
         </div>
         <div class="todo-container__input">
-            <input type="text" placeholder="Название задачи...">
-            <button class="input-button">
+            <input type="text" placeholder="Название задачи..." id="create-text">
+            <button class="input-button" id="create-btn">
                 <i class="fas fa-plus"></i>
                 Добавить
             </button>
         </div>
-        <button class="todo-container__sort-button">
-            <a href="#">Отсортировать по приоритету</a>
+        <button class="todo-container__sort-button" id="sort-btn">
+            <a href="javascript:void(0);">Отсортировать по приоритету</a>
         </button>
-        <ul>
-            <li class="todo-item">
-                <input class="todo-item__sort" type="number" value="1">
-                <section class="todo-item__label">
-                    <p>Выполнить тестовое задание</p>
-                </section>
-                <button class="todo-item__complete-button">
-                    <i class="fas fa-check"></i>
-                </button>
-                <button class="todo-item__delete-button">
-                    <i class="fas fa-times"></i>
-                </button>
-            </li>
-            <li class="todo-item">
-                <input class="todo-item__sort" type="number" value="1">
-                <section class="todo-item__label">
-                    <p>Выполнить тестовое задание</p>
-                </section>
-                <button class="todo-item__complete-button">
-                    <i class="fas fa-check"></i>
-                </button>
-                <button class="todo-item__delete-button">
-                    <i class="fas fa-times"></i>
-                </button>
-            </li>
-            <li class="todo-item">
-                <input class="todo-item__sort" type="number" value="1">
-                <section class="todo-item__label">
-                    <p>Выполнить тестовое задание</p>
-                </section>
-                <button class="todo-item__complete-button">
-                    <i class="fas fa-check"></i>
-                </button>
-                <button class="todo-item__delete-button">
-                    <i class="fas fa-times"></i>
-                </button>
-            </li>
-            <li class="todo-item">
-                <input class="todo-item__sort" type="number" value="1">
-                <section class="todo-item__label">
-                    <p>Выполнить тестовое задание</p>
-                </section>
-                <button class="todo-item__complete-button">
-                    <i class="fas fa-check"></i>
-                </button>
-                <button class="todo-item__delete-button">
-                    <i class="fas fa-times"></i>
-                </button>
-            </li>
-            <li class="todo-item">
-                <input class="todo-item__sort" type="number" value="1">
-                <section class="todo-item__label">
-                    <p>Выполнить тестовое задание</p>
-                </section>
-                <button class="todo-item__complete-button">
-                    <i class="fas fa-check"></i>
-                </button>
-                <button class="todo-item__delete-button">
-                    <i class="fas fa-times"></i>
-                </button>
-            </li>
-            <li class="todo-item">
-                <input class="todo-item__sort" type="number" value="1">
-                <section class="todo-item__label">
-                    <p>Выполнить тестовое задание</p>
-                </section>
-                <button class="todo-item__complete-button">
-                    <i class="fas fa-check"></i>
-                </button>
-                <button class="todo-item__delete-button">
-                    <i class="fas fa-times"></i>
-                </button>
-            </li>
+        <ul id="active-todo-container">
+            {% for element in activeToDo %}
+                <li class="todo-item" id="todo-item-{{ element.id }}">
+                    <input class="todo-item__sort" type="number" value="{{ element.sort }}"
+                           id="todo-item-{{ element.id }}-sort" onchange="updateElem({{ element.id }})">
+                    <section class="todo-item__label">
+                        <p id="todo-item-{{ element.id }}-name">{{ element.name }}</p>
+                    </section>
+                    <button class="todo-item__complete-button" onclick="updateElem({{ element.id }}, 1)">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button class="todo-item__delete-button" onclick="deleteElem({{ element.id }})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </li>
+            {% endfor %}
         </ul>
-        <button class="todo-container__show-more">
-            <a href="#">Показать ещё</a>
-        </button>
+        <ul id="completed-todo-container" style="display: none;">
+            {% for element in completedToDo %}
+                <li class="todo-item" id="todo-item-{{ element.id }}">
+                    <input class="todo-item__sort todo-item__completed" type="number"
+                           id="todo-item-{{ element.id }}-sort" value="{{ element.sort }}" readonly>
+                    <section class="todo-item__label todo-item__completed">
+                        <p>{{ element.name }}</p>
+                    </section>
+                    <button class="todo-item__delete-button" onclick="deleteElem({{ element.id }})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}
