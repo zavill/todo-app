@@ -12,6 +12,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Команда, для отправки запросов из базы на удаленный сервер
+ *
+ * Class SendRequestCommand
+ * @package App\Command\GoldIntern
+ */
 class SendRequestCommand extends Command
 {
     protected static $defaultName = 'goldin:send-data';

@@ -9,7 +9,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 
 /**
- * Команда для отправки запроса о действия с тудушкой на другой сервер
+ * Сервис для отправки запроса о действия с тудушкой на другой сервер
  *
  * Class SendRequest
  * @package App\Service\GoldIntern
