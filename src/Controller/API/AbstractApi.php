@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
+ * Абстрактный класс для API
  *
  * Class AbstractApi
  * @package App\Controller\API

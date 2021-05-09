@@ -18,6 +18,8 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * API задач
+ *
  * @Route("/todoes")
  *
  * Class ToDoAPI
@@ -112,6 +114,8 @@ class ToDoAPI extends AbstractApi
     }
 
     /**
+     * Обновление ToDo
+     *
      * @Route("/{id}", methods={"PUT"})
      */
     public function updateToDo(int $id): JsonResponse
@@ -160,6 +164,8 @@ class ToDoAPI extends AbstractApi
     }
 
     /**
+     * Удаление ToDo
+     *
      * @Route("/{id}", methods={"DELETE"})
      */
     public function deleteToDo($id): JsonResponse
@@ -189,6 +195,8 @@ class ToDoAPI extends AbstractApi
     }
 
     /**
+     * Получение списка ToDo
+     *
      * @Route("/", methods={"GET"})
      */
     public function getList(): JsonResponse

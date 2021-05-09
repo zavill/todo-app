@@ -16,6 +16,8 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
+ * API пользователей
+ *
  * @Route("/users")
  * Class UserAPI
  * @package App\Controller\API
@@ -34,6 +36,8 @@ class UserAPI extends AbstractApi
     }
 
     /**
+     * Авторизация
+     *
      * @Route("/authorize", methods={"GET"})
      * @param UserPasswordEncoderInterface $encoder
      * @return JsonResponse
@@ -81,6 +85,8 @@ class UserAPI extends AbstractApi
     }
 
     /**
+     * Регистрация
+     *
      * @Route("/", methods={"POST"})
      */
     public function register(UserPasswordEncoderInterface $encoder): JsonResponse
@@ -128,6 +134,8 @@ class UserAPI extends AbstractApi
     }
 
     /**
+     * Получение данных из запроса для авторизации/регистрации
+     *
      * @throws ApiException
      */
     public function getAuthData(): array
