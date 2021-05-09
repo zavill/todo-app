@@ -6,6 +6,7 @@ namespace App\Service\GoldIntern;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\RequestOptions;
 
 /**
  * Команда для отправки запроса о действия с тудушкой на другой сервер
@@ -28,7 +29,7 @@ class SendRequest
             $response = $client->post(
                 $_ENV['REQUEST_SERVER'],
                 [
-                    'form_params' => [
+                    RequestOptions::JSON => [
                         'user' => $userId,
                         'action' => $action
                     ]
