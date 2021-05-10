@@ -77,7 +77,7 @@ class ToDoAPI extends AbstractApi
      *
      * @Route("/", methods={"POST"})
      */
-    public function createToDo()
+    public function createToDo(): JsonResponse
     {
         try {
             $this->checkAuthorization();
@@ -124,12 +124,6 @@ class ToDoAPI extends AbstractApi
             $this->checkAuthorization();
             $todo = $this->getToDo($id);
 
-            if (!$name = $this->request->get('name')) {
-                throw new ApiException(
-                    'Не задано название ToDo',
-                    Response::HTTP_UNPROCESSABLE_ENTITY
-                );
-            }
             if (!(int)$sort = $this->request->get('sort')) {
                 throw new ApiException(
                     'Не задана сортировка ToDo',
@@ -139,7 +133,6 @@ class ToDoAPI extends AbstractApi
 
             (bool)$isCompleted = $this->request->get('isCompleted');
 
-            $todo->setName($name);
             $todo->setSort($sort);
             $todo->setIsCompleted($isCompleted);
 
