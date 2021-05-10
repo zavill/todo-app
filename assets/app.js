@@ -150,7 +150,9 @@ function updateElem(id, isComplete = 0) {
             } else {
                 if (data.responseJSON.error === 'Произошла ошибка подсистемы') {
                     sendSubSystemError(false);
-                    moveElemToArchive(id);
+                    if (isComplete === 1) {
+                        moveElemToArchive(id);
+                    }
                 } else {
                     sendError(data.responseJSON.error);
                 }
