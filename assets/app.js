@@ -84,8 +84,9 @@ function createElem() {
             } else {
                 if (data.responseJSON.error === 'Произошла ошибка подсистемы') {
                     sendSubSystemError(true);
+                } else {
+                    sendError(data.responseJSON.error);
                 }
-                sendError(data.responseJSON.error);
             }
         }
     });
@@ -108,7 +109,12 @@ function deleteElem(id) {
                 sendSubSystemError(false);
                 $('#todo-item-' + id).remove();
             } else {
-                sendError(data.responseJSON.error);
+                if (data.responseJSON.error === 'Произошла ошибка подсистемы') {
+                    sendSubSystemError(false);
+                    $('#todo-item-' + id).remove();
+                } else {
+                    sendError(data.responseJSON.error);
+                }
             }
             NProgress.done();
         }
@@ -231,7 +237,7 @@ function sendError(message) {
 function createCompleted(id, name, sort) {
     return '<li class="todo-item" id="todo-item-' + id + '">\n' +
         '<input class="todo-item__sort todo-item__completed" type="number"\n' +
-        '                           value="'+sort+'" readonly>\n' +
+        '                           value="' + sort + '" readonly>\n' +
         '                    <section class="todo-item__label todo-item__completed">\n' +
         '                        <p>' + name + '</p>\n' +
         '                    </section>\n' +
@@ -243,7 +249,7 @@ function createCompleted(id, name, sort) {
 
 function createElement(id, name, sort = 1) {
     return '<li class="todo-item" id="todo-item-' + id + '">\n' +
-        '                    <input class="todo-item__sort" type="number" value="'+sort+'"\n' +
+        '                    <input class="todo-item__sort" type="number" value="' + sort + '"\n' +
         '                           id="todo-item-' + id + '-sort" onchange="updateElem(' + id + ')">\n' +
         '                    <section class="todo-item__label">\n' +
         '                        <p id="todo-item-' + id + '-name">' + name + '</p>\n' +
