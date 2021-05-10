@@ -148,7 +148,12 @@ function updateElem(id, isComplete = 0) {
                 }
                 sendSubSystemError(false);
             } else {
-                sendError(data.responseJSON.error);
+                if (data.responseJSON.error === 'Произошла ошибка подсистемы') {
+                    sendSubSystemError(false);
+                    moveElemToArchive(id);
+                } else {
+                    sendError(data.responseJSON.error);
+                }
             }
             NProgress.done();
         }
